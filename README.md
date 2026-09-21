@@ -10,239 +10,384 @@ A robust, modular, object-oriented **Library Management System** developed in Py
 
 ---
 
-## 📑 Table of Contents
+ent System
 
-- [Overview](#-overview)
-- [System Architecture](#-system-architecture)
-- [Key Features](#-key-features)
-  - [👑 Administrator Panel](#-administrator-panel)
-  - [🎓 Student Panel](#-student-panel)
-- [🛡️ Business Rules & Integrity Guards](#️-business-rules--integrity-guards)
-- [📁 Project Structure](#-project-structure)
-- [🚀 Quick Start & Installation](#-quick-start--installation)
-- [🔑 Default Credentials](#-default-credentials)
-- [💾 Data Schemas](#-data-schemas)
-- [🧪 Running Automated Tests](#-running-automated-tests)
-- [📋 Release History](#-release-history)
 
----
 
-## 🌟 Overview
 
-The **Smart Library Management System** is designed to streamline library workflows for educational institutions and organizations. It replaces paper-based or error-prone logs with an automated CLI system that guarantees transactional consistency across books, students, and inventory states.
 
-```
-+-------------------------------------------------------------------------+
-|                    SMART LIBRARY MANAGEMENT SYSTEM                      |
-+-------------------------------------------------------------------------+
-                                   |
-         +-------------------------+-------------------------+
-         |                                                   |
-         v                                                   v
-  [ 👑 Admin Role ]                                   [ 🎓 Student Role ]
-  - Add / Update / Delete Books                       - Search & View Books
-  - Register & Delete Students                        - Borrow Available Books
-  - View Global Transaction Audit Log                 - Return Borrowed Books
-  - Catalog Inspection & Search                       - View Personal Borrow History
-                                                      - Self-Service Password Change
-```
+A Python-based Library Management System built as a command-line application for managing books, students, and library transactions.
 
----
+The project demonstrates practical use of Python programming, file handling, JSON data storage, authentication, CRUD operations, and library inventory management.
 
-## 🏛️ System Architecture
+📑 Table of Contents
 
-The codebase follows **Clean Architecture & Separation of Concerns (SoC)** principles:
+Overview
 
-- **Data Models (`Book`, `Student`, `Transaction`)**: Encapsulate business entities with serialization (`to_dict`) and deserialization (`from_dict`) methods.
-- **Database Manager (`DatabaseManager`)**: Handles data persistence, file path resolution across environments, JSON read/write operations, and relational query helpers.
-- **Service Layer (`LibraryService`)**: Houses all business logic, transactional validations, inventory recalculation, and integrity verification.
-- **Interface Layer (`LibraryCLI`)**: Interactive console UI supporting nested menus, input sanitization, and formatted tabular views.
+Key Features
 
----
+Administrator Panel
 
-## ✨ Key Features
+Student Panel
 
-### 👑 Administrator Panel
+Business Rules
 
-| Feature | Description |
-| :--- | :--- |
-| **Add Book** | Add new titles with ID, Title, Author, Category, ISBN, and initial Quantity. |
-| **Update Book** | Selectively update any field (Title, Author, Category, ISBN, Quantity) while preserving unchanged fields. |
-| **Delete Book** | Remove books from catalog with safety checks preventing deletion if active borrowings exist. |
-| **View Catalog** | Formatted table displaying all books, authors, stock quantities, and availability status. |
-| **Search Books** | Fast fuzzy search across Book ID, Title, and Author name. |
-| **Register Student** | Create student accounts with unique ID, Name, and initial password. |
-| **View Students** | Directory listing all registered students. |
-| **Delete Student** | Remove student profiles with safety checks blocking deletion if books are currently borrowed. |
-| **View All Transactions**| Master audit trail showing all historical & active borrowings across the entire library. |
+Project Structure
 
----
+Technologies Used
 
-### 🎓 Student Panel
+Installation
 
-| Feature | Description |
-| :--- | :--- |
-| **Catalog Browser** | Browse all available books with real-time stock levels. |
-| **Search Engine** | Query the catalog by ID, Title, or Author. |
-| **Borrow Book** | Checkout books instantly; automatically decrements available copies and creates an active transaction. |
-| **Return Book** | View currently borrowed books and return them; automatically restocks inventory and marks the transaction as `Returned`. |
-| **My Borrowed Books** | Private personal history showing active borrowings and returned books with borrow/return dates. |
-| **Change Password** | Self-service password management with current password verification and match confirmation. |
+How to Run
 
----
+Data Storage
 
-## 🛡️ Business Rules & Integrity Guards
+Learning Objectives
 
-1. **Zero-Stock Protection**: Students cannot borrow books when available quantity is `0`.
-2. **Duplicate Borrow Prevention**: A student cannot borrow multiple copies of the same book at the same time.
-3. **Safe Book Deletion**: Admins cannot delete a book that currently has active `"Borrowed"` records.
-4. **Safe Student Deletion**: Admins cannot delete a student who has outstanding unreturned books.
-5. **Inventory Lower-Bound Guard**: Admins cannot update total book copies to a quantity lower than currently borrowed copies.
-6. **Data Isolation**: Students only have access to their own borrowing records and cannot view other students' activity.
+Future Improvements
 
----
+Author
 
-## 📁 Project Structure
+🌟 Overview
 
-```text
-Library_Management_System/
+The Library Management System is a simple CLI-based application designed to manage common library operations.
+
+It provides separate access for Admin and Student users and stores application data in JSON files.
+
+System Flow
+
+                  📚 LIBRARY MANAGEMENT SYSTEM
+                              │
+                ┌─────────────┴─────────────┐
+                │                           │
+                ▼                           ▼
+          👨‍💼 ADMIN PANEL              🎓 STUDENT PANEL
+                │                           │
+        ┌───────┼────────┐          ┌───────┼────────┐
+        │       │        │          │       │        │
+        ▼       ▼        ▼          ▼       ▼        ▼
+      Books  Students  Records    Search  Borrow   Return
+        │       │        │          │       │        │
+        └───────┴────────┴──────────┴───────┴────────┘
+                              │
+                              ▼
+                       💾 JSON STORAGE
+
+✨ Key Features
+
+👨‍💼 Administrator Panel
+
+The Admin section provides functionality for managing the library.
+
+Feature
+
+Description
+
+📚 Add Book
+
+Add new books to the library catalog
+
+✏️ Update Book
+
+Modify existing book information
+
+🗑️ Delete Book
+
+Remove books from the catalog
+
+🔎 Search Books
+
+Search books using available details
+
+📖 View Books
+
+View the library book catalog
+
+👨‍🎓 Register Student
+
+Create student accounts
+
+👥 View Students
+
+View registered students
+
+🗑️ Delete Student
+
+Remove student records
+
+📋 Transactions
+
+View library transaction records
+
+🎓 Student Panel
+
+Students can use the system to interact with the library catalog and manage their books.
+
+Feature
+
+Description
+
+🔐 Student Login
+
+Login using student credentials
+
+📚 View Books
+
+Browse books available in the library
+
+🔎 Search Books
+
+Find books in the catalog
+
+📖 Borrow Book
+
+Borrow an available book
+
+🔄 Return Book
+
+Return a previously borrowed book
+
+📜 Borrow History
+
+View borrowing-related information
+
+🔑 Change Password
+
+Update student login credentials
+
+🛡️ Business Rules
+
+The system applies basic validation rules to maintain consistent library records.
+
+A book cannot be borrowed when its available quantity is 0.
+
+Students should not borrow the same book multiple times simultaneously.
+
+Book records should be maintained correctly when books are borrowed or returned.
+
+Transaction records are updated when borrowing and returning operations take place.
+
+Student records are managed through the Admin section.
+
+📁 Project Structure
+
+Library_Management_System_v1.0/
 │
-├── Library_Management_System_v1.0/     # Core application package
-│   ├── main.py                         # Application entry point & CLI logic
-│   ├── books.json                      # Book inventory data store
-│   ├── students.json                   # Registered students data store
-│   ├── transactions.json               # Borrowing/returning transaction records
-│   └── README.md                       # Submodule documentation
+├── main.py
 │
-├── tests/                              # Unit & integration test suite
-│   └── test_phase2.py                  # Complete Phase 1 & 2 test suite (14 test cases)
+├── books.json
+├── students.json
+├── transactions.json
 │
-├── test_data_paths.py                  # Environment & relative path validation tests
-├── .gitignore                          # Git ignore rules
-└── README.md                           # Master repository documentation
-```
+└── README.md
 
----
+📄 File Description
 
-## 🚀 Quick Start & Installation
+main.py
 
-### Prerequisites
-- Python **3.8** or higher installed ([Download Python](https://www.python.org/downloads/))
-- Git installed on your system
+Contains the main Python application, menus, authentication, library operations, and program logic.
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/szeeshanZ123/Library_Management_System.git
-cd Library_Management_System
-```
+books.json
 
-### 2. Run the Application
-You can run the application directly from the repository root:
-```bash
-python Library_Management_System_v1.0/main.py
-```
-*Or navigate into the application directory:*
-```bash
+Stores book-related information used by the application.
+
+students.json
+
+Stores registered student information.
+
+transactions.json
+
+Stores borrowing and returning transaction records.
+
+README.md
+
+Project documentation and setup instructions.
+
+🛠️ Technologies Used
+
+Technology
+
+Purpose
+
+🐍 Python
+
+Application development
+
+📄 JSON
+
+Data storage
+
+💻 Command Line Interface
+
+User interaction
+
+📂 File Handling
+
+Reading and writing data
+
+🔐 Authentication
+
+Admin/Student access
+
+🔄 CRUD Operations
+
+Managing records
+
+🚀 Installation
+
+Prerequisites
+
+Make sure you have:
+
+Python installed on your computer
+
+Git installed (if cloning the repository)
+
+1. Clone the Repository
+
+git clone https://github.com/vivektiwari2542/Library_Management_System_v1.0.git
+
+2. Open the Project Directory
+
 cd Library_Management_System_v1.0
+
+▶️ How to Run
+
+Run the following command:
+
 python main.py
-```
 
----
+If your system uses python3:
 
-## 🔑 Default Credentials
+python3 main.py
 
-### Administrator
-- **Username:** `admin`
-- **Password:** `admin123`
+The application will start in the terminal/command prompt.
 
-### Sample Student Accounts (Ready to Test)
-| Student ID | Student Name | Password |
-| :--- | :--- | :--- |
-| `S101` | Alice Smith | `pass123` |
-| `S102` | Bob Jones | `secretbob` |
+💾 Data Storage
 
-*(You can also register a new student directly from the Main Menu!)*
+This project uses JSON files for persistent data storage instead of a traditional database.
 
----
+Books
 
-## 💾 Data Schemas
+books.json
 
-### `books.json`
-```json
-[
-    {
-        "book_id": "B101",
-        "title": "Clean Code",
-        "author": "Robert C. Martin",
-        "category": "Software Engineering",
-        "isbn": "9780132350884",
-        "quantity": 3,
-        "available_status": true
-    }
-]
-```
+Used to store book information and inventory-related data.
 
-### `students.json`
-```json
-[
-    {
-        "student_id": "S101",
-        "name": "Alice Smith",
-        "password": "pass123"
-    }
-]
-```
+Students
 
-### `transactions.json`
-```json
-[
-    {
-        "transaction_id": 1,
-        "student_id": "S101",
-        "book_id": "B101",
-        "borrow_date": "2026-08-17",
-        "return_date": null,
-        "status": "Borrowed"
-    }
-]
-```
+students.json
 
----
+Used to store registered student information.
 
-## 🧪 Running Automated Tests
+Transactions
 
-The repository includes a comprehensive `unittest` test suite covering authentication, stock mutations, transaction lifecycles, deletion constraints, and regression flows.
+transactions.json
 
-Run all tests using:
-```bash
-python -m unittest discover tests
-```
+Used to maintain borrowing and returning records.
 
-To run path resolution tests:
-```bash
-python test_data_paths.py
-```
+🔄 Library Workflow
 
----
+📖 Borrowing a Book
 
-## 📋 Release History
+Student Login
+      ↓
+View/Search Books
+      ↓
+Select Available Book
+      ↓
+Borrow Book
+      ↓
+Inventory Updated
+      ↓
+Transaction Recorded
 
-- **v1.0 (Phase 1)**:
-  - Initial CLI scaffold & Admin authentication.
-  - Student registration & credential validation.
-  - Book catalog management (Add, View, Search).
-  - Student directory viewing.
-- **v2.0 (Phase 2)**:
-  - Interactive Student Borrow & Return workflow.
-  - Dynamic stock decrement & restocking.
-  - Isolated "My Borrowed Books" dashboard.
-  - Global transaction audit log for Admins.
-  - Safe deletion safeguards for active books and students.
-  - Admin update stock lower-bound protection.
-  - Self-service student password updates.
-  - Comprehensive automated test suite (`tests/test_phase2.py`).
+🔄 Returning a Book
 
----
+Student Login
+      ↓
+View Borrowed Books
+      ↓
+Select Book
+      ↓
+Return Book
+      ↓
+Inventory Updated
+      ↓
+Transaction Updated
+
+🎯 Learning Objectives
+
+This project helps demonstrate practical understanding of:
+
+Python programming
+
+Functions
+
+Conditional statements
+
+Loops
+
+File handling
+
+JSON handling
+
+CRUD operations
+
+User authentication
+
+Input validation
+
+Inventory management
+
+Transaction management
+
+Command-line application development
+
+🔮 Future Improvements
+
+The project can be extended with:
+
+🗄️ MySQL or MongoDB database integration
+
+🌐 Web-based interface
+
+🎨 HTML/CSS/JavaScript frontend
+
+📊 Admin dashboard
+
+📈 Library statistics and reports
+
+🔐 Password hashing
+
+📧 Email notifications
+
+🔔 Due-date reminders
+
+☁️ Cloud deployment
+
+📱 Mobile-friendly interface
+
+📌 Project Status
+
+Version: 1.0
+Status: Learning / Academic Project
+Language: Python
+Storage: JSON
+Interface: Command Line
+
+👨‍💻 Author
+
+Vivek Tiwari
+
+B.Sc. Information Technology Student
+
+GitHub: @vivektiwari2542
+
+⭐ Support
+
+If you find this project useful for learning Python and Library Management concepts, consider giving the repository a ⭐ on GitHub.
+
+💡 Note: This project is developed for educational and learning purposes and can be further enhanced with a database, web interface, and additional security features.
 
 ## 📄 License
 
