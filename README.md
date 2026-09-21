@@ -10,12 +10,6 @@ A robust, modular, object-oriented **Library Management System** developed in Py
 
 ---
 
-ent System
-
-
-
-
-
 A Python-based Library Management System built as a command-line application for managing books, students, and library transactions.
 
 The project demonstrates practical use of Python programming, file handling, JSON data storage, authentication, CRUD operations, and library inventory management.
